@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StrongFitApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        .landing-container {
+            min-height: 100vh;
+        }
+
+        .landing-hero {
+            background-color: var(--cor-fundo-escuro);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-portal {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(106, 27, 154, 0.4);
+        }
+
+            .btn-portal:hover {
+                background-color: var(--cor-primaria-hover);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(106, 27, 154, 0.5);
+            }
+
+        .landing-features {
+            background-color: white;
+        }
+
+        .landing-cta {
+            background-color: #f8f9fa;
+        }
+
+        .landing-footer {
+            background-color: var(--cor-fundo-escuro);
+            color: white;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark box-shadow">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-dumbbell me-2"></i>StrongFitApp
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-controller="Landing" asp-action="Portal">
+                                <i class="fas fa-sign-in-alt me-1"></i>Acessar Portal
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="fas fa-user-plus me-1"></i>Registrar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="landing-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-dumbbell me-2"></i>StrongFitApp</h5>
+                    <p>Transformando vidas através do exercício físico.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; @DateTime.Now.Year - StrongFitApp - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light">Privacidade</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@page
+@model StrongFitApp.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center fade-in">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h2 class="mb-0">@ViewData["Title"]</h2>
+            </div>
+            <div class="card-body">
+                <form id="account" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Input.Password" class="form-label"></label>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input asp-for="Input.RememberMe" class="form-check-input" />
+                        <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrar como novo usuário</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

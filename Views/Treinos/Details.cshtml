@@ -1,0 +1,75 @@
+﻿@model Treino
+
+@{
+    ViewData["Title"] = "Detalhes do Treino";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Detalhes do Treino</h1>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.TreinoID" class="btn btn-warning">
+            <i class="fas fa-edit me-2"></i>Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Voltar
+        </a>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h4>Informações Gerais</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Aluno</dt>
+                    <dd class="col-sm-8">@Model.Aluno?.Nome</dd>
+                    
+                    <dt class="col-sm-4">Personal</dt>
+                    <dd class="col-sm-8">@Model.Aluno?.Personal?.Nome</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Data</dt>
+                    <dd class="col-sm-8">@Model.Data.ToString("dd/MM/yyyy")</dd>
+                    
+                    <dt class="col-sm-4">Hora</dt>
+                    <dd class="col-sm-8">@Model.Hora.ToString("HH:mm")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4>Exercícios</h4>
+    </div>
+    <div class="card-body">
+        @if (Model.Exercicios != null && Model.Exercicios.Any())
+        {
+            <div class="row">
+                @foreach (var exercicio in Model.Exercicios)
+                {
+                    <div class="col-md-6 mb-3">
+                        <div class="exercicio-item">
+                            <h5>@exercicio.Nome</h5>
+                            <p>@exercicio.Descricao</p>
+                            <span class="exercicio-categoria">@exercicio.Categoria</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                Este treino não possui exercícios cadastrados.
+            </div>
+        }
+    </div>
+</div>

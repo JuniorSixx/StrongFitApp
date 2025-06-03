@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Inicialização do Sistema";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">Inicialização do Sistema</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção:</strong> Esta página é usada para inicializar o sistema e criar a conta de administrador.
+            <p class="mb-0 mt-2">Use esta página apenas uma vez, durante a configuração inicial.</p>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Informação:</strong> Após a inicialização, você poderá fazer login com:
+            <ul class="mb-0 mt-2">
+                <li><strong>Email:</strong> admin@strongfit.com</li>
+                <li><strong>Senha:</strong> Admin@123</li>
+            </ul>
+        </div>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+            </div>
+        }
+
+        <form asp-action="Initialize" method="post">
+            <div class="mb-3">
+                <label class="form-label">Digite "confirm" para confirmar a inicialização:</label>
+                <input type="text" name="confirm" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-cog me-2"></i>Inicializar Sistema
+            </button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Voltar
+            </a>
+        </form>
+    </div>
+</div>

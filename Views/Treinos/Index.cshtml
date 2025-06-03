@@ -1,0 +1,75 @@
+﻿@model IEnumerable<StrongFitApp.Models.Treino>
+@using System.Linq
+
+@{
+    ViewData["Title"] = "Treinos";
+}
+
+<div class="card fade-in">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">@ViewData["Title"]</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Novo Treino
+        </a>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="table-container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Exercícios</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Aluno?.Nome</td>
+                                <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                                <td>@item.Hora.ToString("HH:mm")</td>
+                                <td>
+                                    @if (item.Exercicios != null && item.Exercicios.Any())
+                                    {
+                                        <span class="badge bg-success">@item.Exercicios.Count() exercícios</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Nenhum exercício</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-action="Edit" asp-route-id="@item.TreinoID" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.TreinoID" class="btn btn-sm btn-outline-info">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.TreinoID" class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>Nenhum treino cadastrado.
+            </div>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Cadastrar Treino
+            </a>
+        }
+    </div>
+</div>

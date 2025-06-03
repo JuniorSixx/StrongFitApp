@@ -1,0 +1,38 @@
+﻿@model Personal
+
+@{
+    ViewData["Title"] = "Excluir Personal";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção!</strong> Tem certeza que deseja excluir este personal?
+            <p class="mb-0 mt-2">Esta ação não pode ser desfeita.</p>
+        </div>
+
+        <div class="details-container mt-4">
+            <dl class="row">
+                <dt class="col-sm-3 details-label">@Html.DisplayNameFor(model => model.Nome)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Nome)</dd>
+
+                <dt class="col-sm-3 details-label">@Html.DisplayNameFor(model => model.Especialidade)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Especialidade)</dd>
+            </dl>
+        </div>
+
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="PersonalID" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash me-2"></i>Confirmar Exclusão
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Voltar
+            </a>
+        </form>
+    </div>
+</div>

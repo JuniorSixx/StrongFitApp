@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Popular Banco de Dados";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">Popular Banco de Dados</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>Informação:</strong> Esta ação irá adicionar dados iniciais ao banco de dados.
+            <p class="mb-0 mt-2">Isso incluirá usuários, personals, alunos, exercícios e treinos de exemplo.</p>
+        </div>
+
+        <form asp-action="SeedDataConfirmed" method="post">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-database me-2"></i>Popular Banco de Dados
+            </button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Voltar
+            </a>
+        </form>
+    </div>
+</div>

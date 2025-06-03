@@ -1,0 +1,140 @@
+﻿@page
+@model StrongFitApp.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<div class="row justify-content-center fade-in">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">@ViewData["Title"]</h2>
+            </div>
+            <div class="card-body">
+                <form id="registerForm" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Input.UserType" class="form-label">Tipo de Usuário</label>
+                        <select asp-for="Input.UserType" class="form-control" id="Input_UserType">
+                            <option value="">Selecione o tipo de usuário</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Aluno">Aluno</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        <span asp-validation-for="Input.UserType" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Nome" class="form-label">Nome Completo</label>
+                                <input asp-for="Input.Nome" class="form-control" />
+                                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Email" class="form-label">Email</label>
+                                <input asp-for="Input.Email" class="form-control" autocomplete="email" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Password" class="form-label">Senha</label>
+                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.ConfirmPassword" class="form-label">Confirmar Senha</label>
+                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3 personal-field" style="display:none;">
+                                <label asp-for="Input.Especialidade" class="form-label">Especialidade</label>
+                                <input asp-for="Input.Especialidade" class="form-control" />
+                                <span asp-validation-for="Input.Especialidade" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3 aluno-field" style="display:none;">
+                                <label asp-for="Input.DataNascimento" class="form-label">Data de Nascimento</label>
+                                <input asp-for="Input.DataNascimento" class="form-control" type="date" />
+                                <span asp-validation-for="Input.DataNascimento" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Telefone" class="form-label">Telefone</label>
+                                <input asp-for="Input.Telefone" class="form-control" autocomplete="tel" />
+                                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label asp-for="Input.Instagram" class="form-label">Instagram</label>
+                                <input asp-for="Input.Instagram" class="form-control" />
+                                <span asp-validation-for="Input.Instagram" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group mb-3 aluno-field" style="display:none;">
+                                <label asp-for="Input.PersonalID" class="form-label">Personal</label>
+                                <select asp-for="Input.PersonalID" class="form-control" asp-items="ViewBag.PersonalID">
+                                    <option value="">Selecione um Personal</option>
+                                </select>
+                                <span asp-validation-for="Input.PersonalID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-user-plus me-2"></i>Registrar
+                        </button>
+                    </div>
+
+                    <div class="form-group mt-3 text-center">
+                        <p>
+                            <a asp-page="./Login">Já tem uma conta? Faça login</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            function toggleFields() {
+                var selectedType = $('#Input_UserType').val();
+
+                if (selectedType === 'Personal') {
+                    $('.personal-field').show();
+                    $('.aluno-field').hide();
+                    // Limpar valores dos campo
+                    $('#Input_PersonalID').val('');
+                    $('#Input_DataNascimento').val('');
+                } else if (selectedType === 'Aluno') {
+                    $('.personal-field').hide();
+                    $('.aluno-field').show();
+                    // Limpar valores dos campos 
+                    $('#Input_Especialidade').val('');
+                } else {
+                    $('.personal-field').hide();
+                    $('.aluno-field').hide();
+                    // Limpar valores de ambos
+                    $('#Input_PersonalID').val('');
+                    $('#Input_DataNascimento').val('');
+                    $('#Input_Especialidade').val('');
+                }
+            }
+
+            toggleFields();
+
+            $('#Input_UserType').change(toggleFields);
+        });
+    </script>
+}

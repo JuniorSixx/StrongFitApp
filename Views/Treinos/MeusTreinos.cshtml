@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Treino>
+@using System.Linq
+
+@{
+    ViewData["Title"] = "Meus Treinos";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">Meus Treinos</h2>
+    </div>
+    <div class="card-body">
+        @if (Model.Any())
+        {
+            <div class="row">
+                @foreach (var treino in Model)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="card treino-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Treino do dia @treino.Data.ToString("dd/MM/yyyy")</h5>
+                                <span class="badge bg-primary">@treino.Hora.ToString("HH:mm")</span>
+                            </div>
+                            <div class="card-body">
+                                @if (treino.Exercicios != null && treino.Exercicios.Any())
+                                {
+                                    <ul class="list-group">
+                                        @foreach (var exercicio in treino.Exercicios)
+                                        {
+                                            <li class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-0">@exercicio.Nome</h6>
+                                                        <span class="badge bg-secondary">@exercicio.Categoria</span>
+                                                    </div>
+                                                    <div>
+                                                        @exercicio.Descricao
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>Nenhum exercício cadastrado para este treino.
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-footer">
+                                <a asp-action="Details" asp-route-id="@treino.TreinoID" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle me-2"></i>Ver Detalhes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>Você ainda não possui treinos cadastrados.
+            </div>
+        }
+    </div>
+</div>

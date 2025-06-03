@@ -1,0 +1,51 @@
+﻿@model StrongFitApp.Models.Exercicio
+
+@{
+    ViewData["Title"] = "Excluir Exercício";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle me-2"></i>Tem certeza que deseja excluir este exercício?
+        </div>
+
+        <div class="details-container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <span class="details-label">Nome:</span>
+                        <h4>@Model.Nome</h4>
+                    </div>
+                    <div class="mb-3">
+                        <span class="details-label">Categoria:</span>
+                        <span class="badge bg-secondary">@Model.Categoria</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <span class="details-label">Séries:</span>
+                        <p>@Model.Series</p>
+                    </div>
+                    <div class="mb-3">
+                        <span class="details-label">Repetições:</span>
+                        <p>@Model.Repeticoes</p>
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="ExercicioID" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash me-2"></i>Excluir
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Voltar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

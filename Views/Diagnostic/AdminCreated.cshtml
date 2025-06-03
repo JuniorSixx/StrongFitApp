@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Admin Criado";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Criação de Usuário Admin</h2>
+    </div>
+    <div class="card-body">
+        <div class="alert @(Model.Contains("sucesso") ? "alert-success" : "alert-info")">
+            @Model
+        </div>
+    </div>
+    <div class="card-footer">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Voltar para Home</a>
+        <a asp-controller="Diagnostic" asp-action="Status" class="btn btn-secondary">Ver Status do Sistema</a>
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-success">Ir para Login</a>
+    </div>
+</div>

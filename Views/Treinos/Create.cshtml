@@ -1,0 +1,101 @@
+﻿@model StrongFitApp.Models.Treino
+@using System.Linq
+
+@{
+    ViewData["Title"] = "Criar Treino";
+}
+
+<div class="card fade-in">
+    <div class="card-header">
+        <h2 class="mb-0">@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="AlunoID" class="form-label">Aluno</label>
+                        <select asp-for="AlunoID" class="form-control" asp-items="ViewBag.AlunoID">
+                            <option value="">Selecione um aluno</option>
+                        </select>
+                        <span asp-validation-for="AlunoID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Data" class="form-label">Data</label>
+                        <input asp-for="Data" class="form-control" type="date" />
+                        <span asp-validation-for="Data" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Hora" class="form-label">Hora</label>
+                        <input asp-for="Hora" class="form-control" type="time" />
+                        <span asp-validation-for="Hora" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Observacoes" class="form-label">Observações</label>
+                        <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Observacoes" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label">Exercícios</label>
+                        <div class="card">
+                            <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                                @if (ViewBag.ExerciciosDisponiveis != null)
+                                {
+                                    var exercicios = ((MultiSelectList)ViewBag.ExerciciosDisponiveis).Items;
+                                    if (exercicios != null && exercicios.Cast<object>().Any())
+                                    {
+                                        foreach (var item in exercicios)
+                                        {
+                                            var exercicio = (Exercicio)item;
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" name="selectedExercicios" value="@exercicio.ExercicioID" id="exercicio_@exercicio.ExercicioID">
+                                                <label class="form-check-label" for="exercicio_@exercicio.ExercicioID">
+                                                    @exercicio.Nome - <span class="badge bg-secondary">@exercicio.Categoria</span>
+                                                </label>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>Nenhum exercício cadastrado. <a asp-controller="Exercicios" asp-action="Create">Cadastrar exercícios</a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>Nenhum exercício cadastrado. <a asp-controller="Exercicios" asp-action="Create">Cadastrar exercícios</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
