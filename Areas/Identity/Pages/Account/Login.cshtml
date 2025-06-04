@@ -13,25 +13,43 @@
             <div class="card-body">
                 <form id="account" method="post">
                     <div asp-validation-summary="All" class="text-danger"></div>
+
                     <div class="mb-3">
                         <label asp-for="Input.Email" class="form-label"></label>
                         <input asp-for="Input.Email" class="form-control" autocomplete="username" />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
+
                     <div class="mb-3">
                         <label asp-for="Input.Password" class="form-label"></label>
                         <input asp-for="Input.Password" class="form-control" autocomplete="current-password" />
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
+
                     <div class="mb-3 form-check">
                         <input asp-for="Input.RememberMe" class="form-check-input" />
                         <label asp-for="Input.RememberMe" class="form-check-label"></label>
                     </div>
+
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </div>
                 </form>
+
+                <hr />
+
+                <!-- Botão de login com Google -->
+                <div class="text-center mt-3">
+                    <form method="post" asp-controller="Account" asp-action="ExternalLogin">
+                        <input type="hidden" name="provider" value="Google" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-google"></i> Entrar com Google
+                        </button>
+                    </form>
+                </div>
             </div>
+
             <div class="card-footer">
                 <div class="text-center">
                     <p>

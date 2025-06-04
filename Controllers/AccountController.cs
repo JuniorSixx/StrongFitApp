@@ -64,7 +64,7 @@ namespace StrongFitApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost] // ✅ Correção aqui — era HttpGet!
         public IActionResult ExternalLogin(string provider, string returnUrl = "/")
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { returnUrl });
